@@ -6,6 +6,7 @@ using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.UIElements;
 using JetBrains.Annotations;
+using Unity.VisualScripting;
 public class PlayerData
 {
     public const string DATA_PATH= "playerData.dat";
@@ -40,7 +41,6 @@ public class PlayerData
 
             SaveData sd = (SaveData) bf.Deserialize(file);
             file.Close();
-            return null;
             //! 
             //Vector3 position = GetVector3(sd.floatPosition[0], sd.floatPosition[1], sd.floatPosition[2]);
             //return position;
@@ -52,6 +52,8 @@ public class PlayerData
             Debug.Log($"File{SAVE_PATH} does not exists.");
             return Vector3.zero;
         }
+        //!to finish
+        return Vector3.zero;
     }
     public float[]floatPosition;
     public float[]floatDestination;
