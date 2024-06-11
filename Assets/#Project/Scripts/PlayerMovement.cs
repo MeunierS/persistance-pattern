@@ -27,6 +27,7 @@ public class PlayerMovement : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         move = playerInput.actions["Move"];
         shoot = playerInput.actions["Shoot"];
+        shoot.performed += ctx => {OnShoot(ctx);};
         characterController = GetComponent<CharacterController>();
         body = GetComponent<Rigidbody>();
         onLifeLost?.Invoke(life);
@@ -38,9 +39,6 @@ public class PlayerMovement : MonoBehaviour
         Vector2 movement = move.ReadValue<Vector2>();
         characterController.Move(new Vector3(movement.x, movement.y, 0) * Time.deltaTime * speed);
         PlayerMovementLimit();
-        if (shoot.IsPressed()){
-            ShootBullet();
-        }
     }
     void OnTriggerEnter(Collider hit){
         hit.GetComponent<CubeMovement>().Die();
@@ -67,8 +65,8 @@ public class PlayerMovement : MonoBehaviour
         }
         onLifeLost?.Invoke(life);
     }
-    private void ShootBullet(){
+    public void OnShoot(InputAction.CallbackContext ctx){
         bullet.Initialize();
-        
+        bullet.transform.Translate(bullet.speed, 0, 0);
     }
 }

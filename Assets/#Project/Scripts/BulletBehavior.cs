@@ -5,7 +5,7 @@ using UnityEngine.Events;
 
 public class BulletBehavior : MonoBehaviour
 {
-    [SerializeField] private float speed = 10.0f;
+    [SerializeField] public float speed = 10.0f;
     public BulletPool pool;
     public bool initialized = false;
     [HideInInspector]public UnityEvent<int> onHit;
